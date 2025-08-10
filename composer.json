@@ -1,0 +1,18 @@
+{
+    "name": "hejunjie/text-adventure-engine",
+    "description": "一个轻量级、可扩展的 PHP 文字冒险游戏核心引擎 Composer 包，专注于游戏流程管理和玩家状态维护，帮助开发者快速搭建基于文字选择的冒险游戏",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Hejunjie\\TextAdventureEngine\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "何俊杰",
+            "email": "junjie.he.925@gmail.com"
+        }
+    ],
+    "require": {}
+}
