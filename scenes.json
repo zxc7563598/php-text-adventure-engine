@@ -104,30 +104,46 @@
         "conditions": [
           {
             "type": "attribute_check",
-            "attribute": "conscience",
-            "operator": ">=",
-            "value": 12,
+            "logic": [
+              {
+                "attribute": "conscience",
+                "operator": ">=",
+                "value": 12
+              }
+            ],
             "nextSceneId": "final-1"
           },
           {
             "type": "attribute_check",
-            "attribute": "conscience",
-            "operator": ">=",
-            "value": 0,
+            "logic": [
+              {
+                "attribute": "conscience",
+                "operator": ">=",
+                "value": 0
+              }
+            ],
             "nextSceneId": "final-2"
           },
           {
             "type": "attribute_check",
-            "attribute": "conscience",
-            "operator": ">=",
-            "value": -11,
+            "logic": [
+              {
+                "attribute": "conscience",
+                "operator": ">=",
+                "value": -11
+              }
+            ],
             "nextSceneId": "final-3"
           },
           {
             "type": "attribute_check",
-            "attribute": "conscience",
-            "operator": "<",
-            "value": -11,
+            "logic": [
+              {
+                "attribute": "conscience",
+                "operator": "<",
+                "value": -11
+              }
+            ],
             "nextSceneId": "final-4"
           }
         ],
