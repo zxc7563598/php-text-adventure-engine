@@ -17,7 +17,7 @@ class Engine
      * @param PlayerState $playerState 玩家状态对象
      * @param SceneRepositoryInterface $sceneRepo 场景仓库接口实现
      */
-    public function __construct(PlayerState $playerState, SceneRepositoryInterface $sceneRepo,PersistenceInterface $persistence)
+    public function __construct(PlayerState $playerState, SceneRepositoryInterface $sceneRepo, PersistenceInterface $persistence)
     {
         $this->playerState = $playerState;
         $this->sceneRepo = $sceneRepo;
@@ -40,13 +40,14 @@ class Engine
     /**
      * 处理用户选择的选项
      *
+     * @param string $user_id 玩家唯一标识
      * @param string $optionKey 用户选择的 Key
      * 
      * @return array|null 返回下一个场景数据或 null（游戏结束）
      * @throws \RuntimeException 如果找不到当前场景
      * @throws \InvalidArgumentException 如果选项无效
      */
-    public function choose(string $optionKey): ?array
+    public function choose(string $user_id, string $optionKey): ?array
     {
         $scene = $this->sceneRepo->getScene($this->playerState->getCurrentSceneId());
         if (!$scene) {
@@ -61,7 +62,7 @@ class Engine
         // 获取下一场景 ID
         $nextSceneId = $chosenOption->getNextSceneId($this->playerState);
         // 存储进度
-        $this->persistence->save('game-1', $this->playerState, $nextSceneId);
+        $this->persistence->save($user_id, $this->playerState, $nextSceneId);
         if (!$nextSceneId) {
             return null; // 游戏结束
         }
