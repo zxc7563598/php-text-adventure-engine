@@ -73,20 +73,27 @@ class Option
     {
         switch ($condition['type']) {
             case 'attribute_check':
-                $attr = $condition['attribute'];
-                $val = $condition['value'];
-                $op = $condition['operator'];
-                $curr = $state->getAttribute($attr) ?? 0;
-
-                return match ($op) {
-                    '>'  => $curr > $val,
-                    '>=' => $curr >= $val,
-                    '<'  => $curr < $val,
-                    '<=' => $curr <= $val,
-                    '==' => $curr == $val,
-                    '!=' => $curr != $val,
-                    default => false,
-                };
+                $logic = $condition['logic'] ?? [];
+                $result = true;
+                foreach ($logic as $cond) {
+                    if (!$result) {
+                        break;
+                    }
+                    $attr = $cond['attribute'];
+                    $val = $cond['value'];
+                    $op = $cond['operator'];
+                    $curr = $state->getAttribute($attr) ?? 0;
+                    $result = match ($op) {
+                        '>'  => $curr > $val,
+                        '>=' => $curr >= $val,
+                        '<'  => $curr < $val,
+                        '<=' => $curr <= $val,
+                        '==' => $curr == $val,
+                        '!=' => $curr != $val,
+                        default => false,
+                    };
+                }
+                return $result;
             case 'always_true':
                 return true;
             default:
