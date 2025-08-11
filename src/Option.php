@@ -9,6 +9,7 @@ class Option
 {
     public string $key;
     public string $label;
+    public string $desc;
     public array $conditions;
     public array $effects;
 
@@ -17,13 +18,15 @@ class Option
      *
      * @param string $key 选项的唯一标识符
      * @param string $label 选项显示文本
+     * @param string $desc 选择选项后展示文本
      * @param array $conditions 条件数组，决定选项是否可用
      * @param array $effects 效果数组，应用于玩家状态
      */
-    public function __construct(string $key, string $label, array $conditions = [], array $effects = [])
+    public function __construct(string $key, string $label, string $desc, array $conditions = [], array $effects = [])
     {
         $this->key = $key;
         $this->label = $label;
+        $this->desc = $desc;
         $this->conditions = $conditions;
         $this->effects = $effects;
     }

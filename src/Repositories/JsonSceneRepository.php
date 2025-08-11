@@ -51,6 +51,7 @@ class JsonSceneRepository implements SceneRepositoryInterface
             $scene->addOption(new Option(
                 $opt['key'],
                 $opt['label'],
+                $opt['desc'],
                 $opt['conditions'] ?? [],
                 $opt['effects'] ?? []
             ));

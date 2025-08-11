@@ -5,7 +5,8 @@
     "options": [
       {
         "key": "step9-1",
-        "label": "拒绝，坚信石头应服务于更广大幸存者的未来，而非某个组织",
+        "label": "拒绝",
+        "desc": "你坚信石头应服务于更广大幸存者的未来，而非某个组织",
         "conditions": [
           {
             "type": "always_true",
@@ -22,7 +23,8 @@
       },
       {
         "key": "step9-2",
-        "label": "假意同意，计划在交易时夺取对方的科技装备",
+        "label": "假意同意",
+        "desc": "你计划在交易时夺取对方的科技装备",
         "conditions": [
           {
             "type": "always_true",
@@ -45,7 +47,8 @@
     "options": [
       {
         "key": "step10-1",
-        "label": "高举“启明石”，走向控制台，心中默念为所有人争取希望",
+        "label": "高举“启明石”",
+        "desc": "走向控制台，心中默念为所有人争取希望",
         "conditions": [
           {
             "type": "attribute_check",
@@ -96,7 +99,8 @@
       },
       {
         "key": "step10-2",
-        "label": "紧握“启明石”，警惕地环视敌人，准备为生存而战/谈判",
+        "label": "紧握“启明石”",
+        "desc": "警惕地环视敌人，准备为生存而战/谈判",
         "conditions": [
           {
             "type": "attribute_check",
