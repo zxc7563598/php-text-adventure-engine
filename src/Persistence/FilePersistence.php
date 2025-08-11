@@ -21,7 +21,7 @@ class FilePersistence implements PersistenceInterface
     public function save(string $playerId, PlayerState $state, string $currentScene): void
     {
         $data = [
-            'attributes' => $state->toArray(),
+            'attributes' => $state->getAllAttributes(),
             'currentScene' => $currentScene,
         ];
         file_put_contents($this->getFilePath($playerId), json_encode($data));
@@ -38,12 +38,7 @@ class FilePersistence implements PersistenceInterface
         if (!$data) {
             return null;
         }
-        $state = new PlayerState($data['attributes'] ?? []);
-        $currentScene = $data['currentScene'] ?? null;
-        if (!$currentScene) {
-            return null;
-        }
-        return ['state' => $state, 'currentScene' => $currentScene];
+        return ['state' => $data['attributes'] ?? [], 'currentScene' => $data['currentScene'] ?? null];
     }
 
     protected function getFilePath(string $playerId): string
