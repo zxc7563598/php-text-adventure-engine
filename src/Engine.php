@@ -32,7 +32,7 @@ class Engine
         } else {
             // 新玩家，默认属性
             $state = new PlayerState();
-            $state->setAttribute('hp', 5);
+            $state->setAttribute('conscience', 0);
             $this->playerStates[$playerId] = $state;
             $this->currentScenes[$playerId] = $startSceneId;
         }
@@ -66,7 +66,7 @@ class Engine
             // 以后可以扩展其他效果类型
         }
 
-        $nextSceneId = $option->getNextSceneId();
+        $nextSceneId = $option->getNextSceneId($this->playerStates[$playerId]);
         $this->currentScenes[$playerId] = $nextSceneId;
 
         $this->persistence->save($playerId, $this->playerStates[$playerId], $nextSceneId);

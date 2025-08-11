@@ -7,14 +7,21 @@ class Option
 {
     protected string $key;
     protected string $label;
-    protected string $nextSceneId;
+    /**
+     * 条件跳转数组，结构示例：
+     * [
+     *   ['condition' => fn(PlayerState $state) => $state->getAttribute('hp') > 3, 'nextSceneId' => 'scene_good'],
+     *   ['condition' => fn(PlayerState $state) => true, 'nextSceneId' => 'scene_bad'],
+     * ]
+     */
+    protected array $conditionalNextScenes = [];
     protected array $effects = []; // 例如 [['type' => 'change_attribute', 'key' => 'hp', 'value' => -1]]
 
-    public function __construct(string $key, string $label, string $nextSceneId, array $effects = [])
+    public function __construct(string $key, string $label, array $conditionalNextScenes = [], array $effects = [])
     {
         $this->key = $key;
         $this->label = $label;
-        $this->nextSceneId = $nextSceneId;
+        $this->conditionalNextScenes = $conditionalNextScenes;
         $this->effects = $effects;
     }
 
@@ -28,9 +35,14 @@ class Option
         return $this->label;
     }
 
-    public function getNextSceneId(): string
+    public function getNextSceneId(PlayerState $state): ?string
     {
-        return $this->nextSceneId;
+        foreach ($this->conditionalNextScenes as $cond) {
+            if (($cond['condition'])($state)) {
+                return $cond['nextSceneId'];
+            }
+        }
+        return null;
     }
 
     public function getEffects(): array
