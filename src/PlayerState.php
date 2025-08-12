@@ -31,7 +31,7 @@ class PlayerState
      */
     public function getAttribute(string $key)
     {
-        return $this->attributes[$key] ?? null;
+        return $this->attributes[$key]['value'] ?? null;
     }
 
     /**
@@ -42,7 +42,7 @@ class PlayerState
      */
     public function setAttribute(string $key, $value): void
     {
-        $this->attributes[$key] = $value;
+        $this->attributes[$key]['value'] = $value;
     }
 
     /**
@@ -53,7 +53,7 @@ class PlayerState
      */
     public function changeAttribute(string $key, $delta): void
     {
-        $this->attributes[$key] = ($this->attributes[$key] ?? 0) + $delta;
+        $this->attributes[$key]['value'] = ($this->attributes[$key]['value'] ?? 0) + $delta;
     }
 
     /**
