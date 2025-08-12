@@ -87,7 +87,8 @@ class Engine
             'description' => $scene->getDescription(),
             'options'    => array_map(fn($opt) => [
                 'key'   => $opt->key,
-                'label' => $opt->label
+                'label' => $opt->label,
+                'desc'  => $opt->desc
             ], $scene->getOptions()),
             'player'     => $this->playerState->getAllAttributes()
         ];
