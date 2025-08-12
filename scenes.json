@@ -1,174 +1,235 @@
 {
-  "setp-9": {
-    "id": "setp-9",
-    "description": "一个衣着体面、自称来自“复兴委员会”的特工找到你。他展示了一些高科技设备（在静默灾变中罕见），声称“启明石”是他们遗失的“世界引擎核心”，承诺给你一个安全的未来和领导地位换取它。他暗示拒绝的“后果”",
+  "start": {
+    "id": "start",
+    "description": "你站在一座被雾气笼罩的古老城堡前，夜色深沉。大门微微开启，仿佛在召唤你进入。",
     "options": [
       {
-        "key": "step9-1",
-        "label": "拒绝",
-        "desc": "你坚信石头应服务于更广大幸存者的未来，而非某个组织",
-        "conditions": [
-          {
-            "type": "always_true",
-            "nextSceneId": "setp-10"
-          }
-        ],
+        "key": "enter-castle",
+        "label": "推门进入古堡",
+        "desc": "你轻轻推开厚重的大门，阴冷的空气扑面而来。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "grand_hall" }],
+        "effects": []
+      },
+      {
+        "key": "walk_around",
+        "label": "绕到侧面看看情况",
+        "desc": "你绕到侧面的墙角，发现一道半掩的密门。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "secret_door" }],
+        "effects": []
+      }
+    ]
+  },
+  "grand_hall": {
+    "id": "grand_hall",
+    "description": "你来到城堡的主大厅，中央的吊灯摇曳，走廊尽头隐约有两扇门。",
+    "options": [
+      {
+        "key": "go_left",
+        "label": "走向左边那扇装饰华丽的门",
+        "desc": "你轻步走向左门，门上镶嵌着神秘符文。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "rune_room" }],
         "effects": [
-          {
-            "type": "change_attribute",
-            "key": "conscience",
-            "value": 3
-          }
+          { "type": "change_attribute", "key": "courage", "value": 1 }
         ]
       },
       {
-        "key": "step9-2",
-        "label": "假意同意",
-        "desc": "你计划在交易时夺取对方的科技装备",
-        "conditions": [
-          {
-            "type": "always_true",
-            "nextSceneId": "setp-10"
-          }
-        ],
+        "key": "go_right",
+        "label": "走向右边那扇简陋的木门",
+        "desc": "你选择右边的木门，吱呀一声缓缓开启。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "library" }],
         "effects": [
-          {
-            "type": "change_attribute",
-            "key": "conscience",
-            "value": -3
-          }
+          { "type": "change_attribute", "key": "wisdom", "value": 1 }
         ]
       }
     ]
   },
-  "setp-10": {
-    "id": "setp-10",
-    "description": "历经艰险，你到达了地图标记的“静默核心”——一个巨大的、死寂的环形山，中央有一座奇异的、半嵌入地下的装置。“启明石”在你手中发出共鸣。装置前站着莉娜（若第5回合未解决）或复兴委员会特工（若第9回合未解决）或他们的残部，虎视眈眈。装置控制台亮起，似乎需要放入石头并做出最终选择",
+  "secret_door": {
+    "id": "secret_door",
+    "description": "你推开密门，发现一条通往地下的楼梯，里面隐隐透出冷光。",
     "options": [
       {
-        "key": "step10-1",
-        "label": "高举“启明石”",
-        "desc": "走向控制台，心中默念为所有人争取希望",
+        "key": "descend",
+        "label": "顺着楼梯下去",
+        "desc": "你小心地下楼，脚步回音中带着一丝不安。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "underground_chamber" }],
+        "effects": [
+          { "type": "change_attribute", "key": "courage", "value": 2 }
+        ]
+      },
+      {
+        "key": "retreat",
+        "label": "退回主入口",
+        "desc": "你觉得不妥，小心退回了城堡正门前。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "start" }],
+        "effects": []
+      }
+    ]
+  },
+  "rune_room": {
+    "id": "rune_room",
+    "description": "房间中央的石桌上，漂浮着一块闪烁符文。",
+    "options": [
+      {
+        "key": "touch_rune",
+        "label": "触摸符文",
+        "desc": "你伸手触碰符文，一阵寒光入骨。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "curse_scene" }],
+        "effects": [
+          { "type": "change_attribute", "key": "health", "value": -5 },
+          { "type": "change_attribute", "key": "courage", "value": 1 }
+        ]
+      },
+      {
+        "key": "leave_room",
+        "label": "不敢靠近，退出房间",
+        "desc": "你后退几步，离开装饰华丽的房间。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "grand_hall" }],
+        "effects": []
+      }
+    ]
+  },
+  "library": {
+    "id": "library",
+    "description": "一间古老的图书馆，尘封的书架上有一本发光的书。",
+    "options": [
+      {
+        "key": "read_book",
+        "label": "拿起发光的书阅读",
+        "desc": "你翻开书页，文字在眼前跳动，你感觉大脑被充盈。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "knowledge_scene" }],
+        "effects": [
+          { "type": "change_attribute", "key": "wisdom", "value": 2 }
+        ]
+      },
+      {
+        "key": "ignore_book",
+        "label": "无视那本书，离开图书馆",
+        "desc": "你觉得还是不要碰更好，离开了图书馆。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "grand_hall" }],
+        "effects": []
+      }
+    ]
+  },
+  "underground_chamber": {
+    "id": "underground_chamber",
+    "description": "你进入一间幽暗的地下密室，墙壁上刻着奇怪的符号。",
+    "options": [
+      {
+        "key": "decipher_symbols",
+        "label": "尝试解读符号",
+        "desc": "你专注研读，符号隐隐指引一条通往宝藏的秘密通道。",
         "conditions": [
           {
             "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": 12
-              }
-            ],
-            "nextSceneId": "final-1"
+            "logic": [{ "attribute": "wisdom", "operator": ">=", "value": 1 }],
+            "nextSceneId": "treasure_room"
           },
           {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": 0
-              }
-            ],
-            "nextSceneId": "final-2"
-          },
-          {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": -11
-              }
-            ],
-            "nextSceneId": "final-3"
-          },
-          {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": "<",
-                "value": -11
-              }
-            ],
-            "nextSceneId": "final-4"
+            "type": "always_true",
+            "nextSceneId": "trap_room"
           }
         ],
         "effects": []
       },
       {
-        "key": "step10-2",
-        "label": "紧握“启明石”",
-        "desc": "警惕地环视敌人，准备为生存而战/谈判",
+        "key": "go_back_up",
+        "label": "返回楼上",
+        "desc": "你决定暂时回撤，重回密门口。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "secret_door" }],
+        "effects": []
+      }
+    ]
+  },
+  "curse_scene": {
+    "id": "curse_scene",
+    "description": "你感受到一股诅咒能量侵蚀身体，幸好距离不远处有一扇门。",
+    "options": [
+      {
+        "key": "push_forward",
+        "label": "忍痛前行，推开那扇门",
+        "desc": "你咬牙坚持，推门而入。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "escape_tunnel" }],
+        "effects": [{ "type": "change_attribute", "key": "health", "value": -10 }]
+      },
+      {
+        "key": "flee",
+        "label": "受不了恐惧，赶紧逃回大厅",
+        "desc": "你惊慌逃出来，回到主大厅。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "grand_hall" }],
+        "effects": []
+      }
+    ]
+  },
+  "knowledge_scene": {
+    "id": "knowledge_scene",
+    "description": "知识的力量涌入心中，你觉得自己能够看透迷雾。",
+    "options": [
+      {
+        "key": "return_hall",
+        "label": "带着新的智慧回到大厅",
+        "desc": "你带着知识回到大厅，胸中充满信心。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "grand_hall" }],
+        "effects": []
+      }
+    ]
+  },
+  "trap_room": {
+    "id": "trap_room",
+    "description": "你触发了机关，密室陷入黑暗，墙壁缓缓闭合。",
+    "options": [
+      {
+        "key": "dodge",
+        "label": "敏捷躲避封闭墙壁",
+        "desc": "你迅速侧身，险险避开，墙壁重重撞击后恢复原位。",
         "conditions": [
           {
             "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": 12
-              }
-            ],
-            "nextSceneId": "final-1"
+            "logic": [{ "attribute": "courage", "operator": ">=", "value": 2 }],
+            "nextSceneId": "treasure_room"
           },
           {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": 0
-              }
-            ],
-            "nextSceneId": "final-2"
-          },
-          {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": ">=",
-                "value": -11
-              }
-            ],
-            "nextSceneId": "final-3"
-          },
-          {
-            "type": "attribute_check",
-            "logic": [
-              {
-                "attribute": "conscience",
-                "operator": "<",
-                "value": -11
-              }
-            ],
-            "nextSceneId": "final-4"
+            "type": "always_true",
+            "nextSceneId": "curse_scene"
           }
         ],
         "effects": []
       }
     ]
   },
-  "final-1": {
-    "id": "final-1",
-    "description": "你无私的选择汇聚成强大的“心之光”。“启明石”被安全激活，装置发出柔和的脉冲，枯萎的大地开始萌发微弱绿意，停滞的机器发出低鸣。你不是统治者，而是希望的象征。幸存者们自发聚集在你带来的生机周围，一个基于互助与重建的新时代艰难开启。莉娜/特工要么被感化，要么被幸存者的希望浪潮淹没",
+  "treasure_room": {
+    "id": "treasure_room",
+    "description": "你终于发现秘密宝藏室，满地金银与古老秘宝。",
+    "options": [
+      {
+        "key": "take_treasure",
+        "label": "拿起宝藏，结束探险",
+        "desc": "你收集宝藏，胜利结束了这场冒险。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "end_win" }],
+        "effects": []
+      }
+    ]
+  },
+  "escape_tunnel": {
+    "id": "escape_tunnel",
+    "description": "这是通向城堡外的一条隐秘通道，冷风中你看到了自由的光。",
+    "options": [
+      {
+        "key": "escape",
+        "label": "走出通道，逃离城堡",
+        "desc": "你冲出通道，逃出生天。",
+        "conditions": [{ "type": "always_true", "nextSceneId": "end_survive" }],
+        "effects": []
+      }
+    ]
+  },
+  "end_win": {
+    "id": "end_win",
+    "description": "你带着宝藏离开古堡，迎接黎明与新的开始。",
     "options": []
   },
-  "final-2": {
-    "id": "final-2",
-    "description": "你的善良在黑暗中点亮了微光。“启明石”被激活，但效果有限，可能只净化了小片区域或稳定了装置。绿洲诞生，但依然脆弱。你可能是其中的一位领导者或守护者，世界依然艰难，但你证明了人性未泯。莉娜/特工可能被击退或达成脆弱协议，威胁仍在",
-    "options": []
-  },
-  "final-3": {
-    "id": "final-3",
-    "description": "你活下来了，代价是灵魂的磨损。“启明石”可能被激活（效果不稳定），或被你用来交易换取个人安全区/权力。你得到了庇护和地位，但周围是猜忌、奴役或强权统治。绿洲或许存在，但冰冷无情。莉娜/特工可能成为你的同伙或新的敌人。夜晚，过去的阴影会萦绕心头",
-    "options": []
-  },
-  "final-4": {
-    "id": "final-4",
-    "description": "你被黑暗彻底吞噬。你可能强行激活“启明石”导致灾难性爆炸/吞噬，或用它向莉娜/特工换取毁灭性的力量，成为新的掠夺霸主。世界滑向更深的深渊，你统治的“绿洲”是绝望的牢笼。人性之光在你身上彻底熄灭，你成为了“静默灾变”最可怕的产物",
+  "end_survive": {
+    "id": "end_survive",
+    "description": "你侥幸逃出但没找到宝藏，活着就好，也是另一种结局。",
     "options": []
   }
 }
